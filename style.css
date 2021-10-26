@@ -1,0 +1,46 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: grey;
+    color: white;
+    height: 15%;
+}
+.winner {
+    align-content: center;
+}
+.button {
+    align-self: center;
+}
+.board {
+    display: grid;
+    background: #222;
+    color: white;
+    gap: 10px;
+    padding: 10px;
+    flex-grow: 1;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 1000px;
+}
+
+.square {
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    font-family: cursive;
+    color: black;
+    width: auto;
+    height: auto;
+}
+
+.board__tile:hover {
+    background: #eeeeee;
+}
+
+.board__tile--winner {
+    color: green;
+}

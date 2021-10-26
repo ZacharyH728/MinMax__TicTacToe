@@ -1,70 +1,80 @@
-class game {
+import viewBoard from './board.js';
+export default class general {
 	constructor() {
-		this.first = 'X';
+		this.first = 'O';
 		this.board = new Array(9).fill(null);
 	}
 
-	nexturn() {
+	nextTurn() {
 		if (this.first === 'X') {
 			this.first = 'O';
-		} else {
+		} else if (this.first === "O") {
 			this.first = 'X';
 		}
 	}
 
 	move(i) {
-		if (this.board[i] !== null) {
+		if (this.board[i] == null) {
+			console.log(this.first)
+			this.nextTurn()
 			this.board[i] = this.first;
+			this.nextTurn()
+			this.nextTurn()
 		}
 	}
 
-	checkwin() {
+	checkWin() {
 		//Checks win condition horizontally
-		for (let j = 0; j < 6; h += 3) {
-			if (this.board[j] === this.board[j + 1] && this.board[j + 1] === this.board[j + 2]) {
-				// If nobody wins function returns 0
-				// If player X wins function returns 1
-				// If player O wins function returns 2
-				if (this.board[j] === 'X') {
-					return 1;
-				} else {
-					return 2;
+		for (let i = 0; i < 9; i += 3) {
+			if (this.board[i] == this.board[i + 1] && this.board[i + 1] == this.board[i + 2]) {
+				if (this.board[i] !== null) {
+					let tmp = [
+						this.board[i],
+						i,
+						i + 1,
+						i + 2
+					];
+					return tmp;
 				}
 			}
 		}
-        //Checks win condition from left to right vertically
-		for (let j = 0; j < 6; h += 3) {
-			if (this.board[j] === this.board[j + 3] && this.board[j + 3] === this.board[j + 6]) {
-				// If nobody wins function returns 0
-				// If player X wins function returns 1
-				// If player O wins function returns 2
-				if (this.board[j] === 'X') {
-					return 1;
-				} else {
-					return 2;
+		//Checks win condition from left to right vertically
+		for (let i = 0; i < 3; i++) {
+			if (this.board[i] === this.board[i + 3] && this.board[i + 3] === this.board[i + 6]) {
+				if (this.board[i] !== null) {
+					let tmp = [
+						this.board[i],
+						i,
+						i + 3,
+						i + 6
+					];
+					return tmp;
 				}
 			}
 		}
-        //Checks win conition criss-cross
-        if (this.board[2] === this.board[4] && this.board[4] === this.board[8]) {
-            // If nobody wins function returns 0
-            // If player X wins function returns 1
-            // If player O wins function returns 2
-            if (this.board[4] === 'X') {
-                return 1;
-            } else {
-                return 2;
-            }
-        }
-        if (this.board[2] === this.board[4] && this.board[4] === this.board[6]) {
-            // If nobody wins function returns 0
-            // If player X wins function returns 1
-            // If player O wins function returns 2
-            if (this.board[4] === 'X') {
-                return 1;
-            } else {
-                return 2;
-            }
-        }
+		//Checks win conition criss-cross
+		if (this.board[2] === this.board[4] && this.board[4] === this.board[6]) {
+			if (this.board[2] !== null) {
+				let tmp = [
+					this.board[2],
+					2,
+					4,
+					6
+				];
+				return tmp;
+			}
+		}
+		if (this.board[0] === this.board[4] && this.board[4] === this.board[8]) {
+			if (this.board[0] !== null) {
+				let tmp = [
+					this.board[0],
+					0,
+					4,
+					8
+				];
+				return tmp;
+			}
+		}
+		return false;
 	}
 }
